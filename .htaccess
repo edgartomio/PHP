@@ -1,0 +1,42 @@
+<IfModule mod_gzip.c>
+mod_gzip_static_suffix .gz
+AddEncoding gzip .gz
+AddEncoding gzip .gzip
+mod_gzip_on YES
+</IfModule>
+<FilesMatch "\.(js|css|html|htm|php|xml)$"> 
+#SetOutputFilter DEFLATE 
+</FilesMatch>
+
+RewriteEngine On
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^[a-z,-]+$ index.php?cidade=$0 [L]
+RewriteRule ^interna\/(.*)-([0-9]+)\.html$ pagina-interna.php?id=$2 [L]
+RewriteRule ^([0-9]+)\/login-comprar.php$ login-comprar.php?id=$1&url=id=$0 [L]
+RewriteRule ^([a-z,-]+)\/convite\/([0-9]+)\.html$ cadastrar.php?cidade=$1&id_indicador=$2 [L]
+#RewriteRule ^([a-z,-]+)\/convite\/([0-9]+)\.html$ cadastro.php?cidade=$1&id_indicador=$2 [L]
+RewriteRule ^comprar\/(.*)-([0-9]+)$ comprar.php?id=$2 [L]
+RewriteRule ^oferta\/(.*)-([0-9]+)$ oferta.php?id=$2 [L]
+RewriteRule ^oferta-demo\/(.*)-([0-9]+)$ oferta-demo.php?id=$2 [L]
+RewriteRule ^promocao-demo\/(.*)-([0-9]+)$ promocao-demo.php?id=$2 [L]
+RewriteRule ^([a-z,-]+)\/oferta\/(.*)-([0-9]+)$ oferta.php?cidade=$1&id=$3 [L]
+RewriteRule ^recupera-senha-executa\/([0-9]+)\/([a-z,0-9]+)\.html$ recupera-senha-executa.php?id=$1&validador=$2 [L]
+RewriteRule ^confirma-newsletter\/([0-9]+)\/([a-z,A-Z,0-9,=]+)\.html$ confirma-newsletter.php?id=$1&email=$2 [L]
+RewriteRule ^index\.html$ index.php [L]
+RewriteRule ^ganhe-bonus\.html$ interna/ganhe-uma--sobre-as-compras-20.html [L]
+
+
+RewriteRule ^(semoferta|splash|seja-parceiro|cadastrar|login|usuarios|sair|usuarios-convidaramigos|faq|usuarios-meusdados|usuarios-minhafoto|usuarios-meuscupons|usuarios-meusconvites|ofertas-recentes|contato)\.html$ $1.php?[L]
+
+
+RewriteRule ^painel\/recupera-senha-executa\/([0-9]+)\/([a-z,0-9]+)\.html$ painel/recupera-senha-executa.php?id=$1&validador=$2 [L]
+RewriteRule ^promocao\/(.*)-([0-9]+)$ promocao.php?id=$2 [L]
+RewriteRule ^promocao-comprar\/(.*)-([0-9]+)$ promocao-comprar.php?id=$2 [L]
+RewriteRule ^(.*)\.xml$ $1.php [L]
+
+
+
+
+
